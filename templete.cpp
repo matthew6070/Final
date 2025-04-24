@@ -242,22 +242,22 @@ private:
     }
 
     // Helper method for in-order traversal (low to high)
-    void inOrderTraversal(TreeNode* node) const {
+    void orderDirection(TreeNode* node) const {
         if (node != nullptr) {
-            inOrderTraversal(node->left);
+            orderDirection(node->left);
             node->car->showInfo();
             cout << endl;
-            inOrderTraversal(node->right);
+            orderDirection(node->right);
         }
     }
 
     // Helper method for reverse in-order traversal (high to low)
-    void reverseInOrderTraversal(TreeNode* node) const {
+    void reverseOrder(TreeNode* node) const {
         if (node != nullptr) {
-            reverseInOrderTraversal(node->right);
+            reverseOrder(node->right);
             node->car->showInfo();
             cout << endl;
-            reverseInOrderTraversal(node->left);
+            reverseOrder(node->left);
         }
     }
 
@@ -293,7 +293,7 @@ public:
         }
 
         cout << "\n----- Cars Sorted by cost (Low to High) -----" << endl;
-        inOrderTraversal(root);
+        orderDirection(root);
     }
 
     // show cars sorted by cost (high to low)
@@ -304,7 +304,7 @@ public:
         }
 
         cout << "\n----- Cars Sorted by cost (High to Low) -----" << endl;
-        reverseInOrderTraversal(root);
+        reverseOrder(root);
     }
 };
 
