@@ -221,12 +221,11 @@ public:
     }
 };
 
-// Binary Search Tree class for cost-based sorting
+// Class used to sort cars by costs
 class BinarySearchTree {
 private:
     TreeNode* root;
 
-    // Helper method for adding a car
     TreeNode* insert(TreeNode* node, Car* car) {
         if (node == nullptr) {
             return new TreeNode(car);
@@ -241,7 +240,7 @@ private:
         return node;
     }
 
-    // Helper method for in-order traversal (low to high)
+    // low to high cost Traversal
     void inOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
             inOrderTraversal(node->left);
@@ -251,7 +250,7 @@ private:
         }
     }
 
-    // Helper method for reverse in-order traversal (high to low)
+    // high to low cost Traversal
     void reverseInOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
             reverseInOrderTraversal(node->right);
@@ -261,12 +260,11 @@ private:
         }
     }
 
-    // Helper method for cleanup
-    void cleanup(TreeNode* node) {
+
+    void nodeDeletion(TreeNode* node) {
         if (node != nullptr) {
-            cleanup(node->left);
-            cleanup(node->right);
-            // Note: Don't delete car objects here, as they are owned by the LinkedList
+            nodeDeletion(node->left);
+            nodeDeletion(node->right);
             delete node;
         }
     }
@@ -277,15 +275,15 @@ public:
     }
 
     ~BinarySearchTree() {
-        cleanup(root);
+        nodeDeletion(root);
     }
 
-    // Add a car to the BST based on cost
+    // Use cost to add cars to BST
     void addCar(Car* car) {
         root = insert(root, car);
     }
 
-    // show cars sorted by cost (low to high)
+    // show cars sorted by low to high costs
     void carCostLowToHigh() const {
         if (root == nullptr) {
             cout << "No cars in the catalog." << endl;
@@ -296,7 +294,7 @@ public:
         inOrderTraversal(root);
     }
 
-    // show cars sorted by cost (high to low)
+    // show cars sorted by high to low costs
     void carCostHighToLow() const {
         if (root == nullptr) {
             cout << "No cars in the catalog." << endl;
@@ -308,7 +306,7 @@ public:
     }
 };
 
-// Main function
+
 int main() {
     LinkedList carList;
     BinarySearchTree costTree;
@@ -340,7 +338,8 @@ int main() {
             }
 
             switch (choice) {
-                case 1: // Add a Sedan
+                //add a Sedan car type
+                case 1: 
                     cout << "Enter brand: ";
                     cin >> brand;
                     cout << "Enter modelType: ";
@@ -357,8 +356,8 @@ int main() {
                     costTree.addCar(newCar);
                     cout << "Sedan added successfully!" << endl;
                     break;
-                
-                case 2: // Add an SUV
+                //add a SUV car type
+                case 2: 
                     cout << "Enter brand: ";
                     cin >> brand;
                     cout << "Enter modelType: ";
@@ -376,7 +375,7 @@ int main() {
                     cout << "SUV added successfully!" << endl;
                     break;
                 
-                case 3: // Add a Truck
+                case 3: // Add a Truck car Type
                     cout << "Enter brand: ";
                     cin >> brand;
                     cout << "Enter modelType: ";
@@ -396,25 +395,26 @@ int main() {
                     cout << "Truck added successfully!" << endl;
                     break;
                 
-                case 4: // show all cars
+                // list all cars
+                case 4: 
                     carList.showAllCars();
                     break;
-                
-                case 5: // show cars by type
+                // show cars by type
+                case 5: 
                     cout << "Enter car type (Sedan, SUV, or Truck): ";
                     cin >> type;
                     carList.showCarsByType(type);
                     break;
-                
-                case 6: // show cars by cost (Low to High)
+                // show cars by cost Low to High cost
+                case 6: 
                     costTree.carCostLowToHigh();
                     break;
-                
-                case 7: // show cars by cost (High to Low)
+                // list cars by High to Low cost
+                case 7: 
                     costTree.carCostHighToLow();
                     break;
-                
-                case 8: // Exit
+                // Exit the program
+                case 8: 
                     cout << "Exiting program. Goodbye!" << endl;
                     break;
                 
