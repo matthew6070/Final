@@ -328,9 +328,8 @@ int main() {
             cout << "3. Add a Truck" << endl;
             cout << "4. show all cars" << endl;
             cout << "5. show cars by type" << endl;
-            cout << "6. show cars by cost (Low to High)" << endl;
-            cout << "7. show cars by cost (High to Low)" << endl;
-            cout << "8. Exit" << endl;
+            cout << "6. show cars by cost" << endl;
+            cout << "7. Exit" << endl;
             cout << "Enter your choice: ";
             
             if (!(cin >> choice)) {
@@ -405,16 +404,12 @@ int main() {
                     cin >> type;
                     carList.showCarsByType(type);
                     break;
-                // show cars by cost Low to High cost
+                // show cars by cost
                 case 6: 
-                    costTree.carCostLowToHigh();
-                    break;
-                // list cars by High to Low cost
-                case 7: 
-                    costTree.carCostHighToLow();
+                    costTree.carCost();
                     break;
                 // Exit the program
-                case 8: 
+                case 7: 
                     cout << "Exiting program. Goodbye!" << endl;
                     break;
                 
