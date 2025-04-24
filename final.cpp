@@ -93,7 +93,7 @@ public:
     }
 };
 
-// Derived class - Truck
+// Derived class Truck
 class Truck : public Car {
 private:
     double bedLength;
@@ -114,7 +114,7 @@ public:
     }
 };
 
-// Node class for linked list
+// Node class for the linked list
 class Node {
 public:
     Car* car;
@@ -142,7 +142,7 @@ public:
         while (current != nullptr) {
             Node* next = current->next;
             delete current->car; // Delete the Car object
-            delete current;      // Delete the Node
+            delete current; // Delete the Node
             current = next;
         }
     }
@@ -243,20 +243,20 @@ private:
     // low to high cost Traversal
     void inOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
-            inOrderTraversal(node->left);
+            orderDirection(node->left);
             node->car->showInfo();
             cout << endl;
-            inOrderTraversal(node->right);
+            orderDirection(node->right);
         }
     }
 
     // high to low cost Traversal
     void reverseInOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
-            reverseInOrderTraversal(node->right);
+            reverseOrder(node->right);
             node->car->showInfo();
             cout << endl;
-            reverseInOrderTraversal(node->left);
+            reverseOrder(node->left);
         }
     }
 
@@ -291,7 +291,7 @@ public:
         }
 
         cout << "\n----- Cars Sorted by cost (Low to High) -----" << endl;
-        inOrderTraversal(root);
+        orderDirection(root);
     }
 
     // show cars sorted by high to low costs
@@ -302,7 +302,7 @@ public:
         }
 
         cout << "\n----- Cars Sorted by cost (High to Low) -----" << endl;
-        reverseInOrderTraversal(root);
+        reverseOrder(root);
     }
 };
 
