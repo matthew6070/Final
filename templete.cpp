@@ -12,83 +12,83 @@ using namespace std;
 // Base Car class (abstract)
 class Car {
 protected:
-    string make;
-    string model;
-    int year;
-    double price;
+    string brand;
+    string modelType;
+    int modelYear;
+    double cost;
 
 public:
     // Constructor
-    Car(string make, string model, int year, double price) {
-        this->make = make;
-        this->model = model;
-        this->year = year;
-        this->price = price;
+    Car(string brand, string modelType, int modelYear, double cost) {
+        this->brand = brand;
+        this->modelType = modelType;
+        this->modelYear = modelYear;
+        this->cost = cost;
     }
 
     // Virtual destructor
     virtual ~Car() {}
 
     // Getters
-    string getMake() const { return make; }
-    string getModel() const { return model; }
-    int getYear() const { return year; }
-    double getPrice() const { return price; }
+    string getMake() const { return brand; }
+    string getModel() const { return modelType; }
+    int getModelYear() const { return modelYear; }
+    double getCost() const { return cost; }
 
     // Pure virtual function (makes Car an abstract class)
     virtual string getType() const = 0;
 
-    // Virtual function to display car details
-    virtual void displayInfo() const {
-        cout << year << " " << make << " " << model << endl;
+    // Virtual function to show car details
+    virtual void showInfo() const {
+        cout << modelYear << " " << brand << " " << modelType << endl;
         cout << "Type: " << getType() << endl;
-        cout << "Price: $" << price << endl;
+        cout << "cost: $" << cost << endl;
     }
 
-    // Operator overloading for comparing car prices
+    // Operator overloading for comparing car costs
     bool operator<(const Car& other) const {
-        return price < other.price;
+        return cost < other.cost;
     }
 
     bool operator>(const Car& other) const {
-        return price > other.price;
+        return cost > other.cost;
     }
 };
 
-// Derived class - Sedan
+// Sedan -
 class Sedan : public Car {
 private:
-    int numDoors;
+    int doorNum;
 
 public:
-    Sedan(string make, string model, int year, double price, int doors)
-        : Car(make, model, year, price), numDoors(doors) {}
+    Sedan(string brand, string modelType, int modelYear, double cost, int doors)
+        : Car(brand, modelType, modelYear, cost), doorNum(doors) {}
 
     string getType() const override {
         return "Sedan";
     }
 
-    void displayInfo() const override {
-        Car::displayInfo();
-        cout << "Doors: " << numDoors << endl;
+    void showInfo() const override {
+        Car::showInfo();
+        cout << "Doors: " << doorNum << endl;
     }
 };
 
-// Derived class - SUV
+// SUV- DERIVED CLASS
 class SUV : public Car {
 private:
     bool hasThirdRow;
 
 public:
-    SUV(string make, string model, int year, double price, bool thirdRow)
-        : Car(make, model, year, price), hasThirdRow(thirdRow) {}
+    SUV(string brand, string modelType, int modelYear, double cost, bool thirdRow)
+        : Car(brand, modelType, modelYear, cost), hasThirdRow(thirdRow) {}
 
     string getType() const override {
         return "SUV";
     }
 
-    void displayInfo() const override {
-        Car::displayInfo();
+    void showInfo() const override {
+        Car::showInfo();
         cout << "Third Row: " << (hasThirdRow ? "Yes" : "No") << endl;
     }
 };
@@ -100,15 +100,15 @@ private:
     double towingCapacity;
 
 public:
-    Truck(string make, string model, int year, double price, double bedLen, double towCap)
-        : Car(make, model, year, price), bedLength(bedLen), towingCapacity(towCap) {}
+    Truck(string brand, string modelType, int modelYear, double cost, double bedLen, double towCap)
+        : Car(brand, modelType, modelYear, cost), bedLength(bedLen), towingCapacity(towCap) {}
 
     string getType() const override {
         return "Truck";
     }
 
-    void displayInfo() const override {
-        Car::displayInfo();
+    void showInfo() const override {
+        Car::showInfo();
         cout << "Bed Length: " << bedLength << " ft" << endl;
         cout << "Towing Capacity: " << towingCapacity << " lbs" << endl;
     }
@@ -168,8 +168,8 @@ public:
         current->next = newNode;
     }
 
-    // Display all cars in the linked list
-    void displayAllCars() const {
+    // show all cars in the linked list
+    void showAllCars() const {
         if (head == nullptr) {
             cout << "No cars in the catalog." << endl;
             return;
@@ -179,13 +179,13 @@ public:
         int count = 1;
         while (current != nullptr) {
             cout << "\n--- Car #" << count++ << " ---" << endl;
-            current->car->displayInfo();
+            current->car->showInfo();
             current = current->next;
         }
     }
 
-    // Display cars of a specific type
-    void displayCarsByType(const string& type) const {
+    // show cars of a specific type
+    void showCarsByType(const string& type) const {
         if (head == nullptr) {
             cout << "No cars in the catalog." << endl;
             return;
@@ -196,7 +196,7 @@ public:
         while (current != nullptr) {
             if (current->car->getType() == type) {
                 cout << "\n--- " << type << " #" << ++count << " ---" << endl;
-                current->car->displayInfo();
+                current->car->showInfo();
             }
             current = current->next;
         }
@@ -221,7 +221,7 @@ public:
     }
 };
 
-// Binary Search Tree class for price-based sorting
+// Binary Search Tree class for cost-based sorting
 class BinarySearchTree {
 private:
     TreeNode* root;
@@ -245,7 +245,7 @@ private:
     void inOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
             inOrderTraversal(node->left);
-            node->car->displayInfo();
+            node->car->showInfo();
             cout << endl;
             inOrderTraversal(node->right);
         }
@@ -255,7 +255,7 @@ private:
     void reverseInOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
             reverseInOrderTraversal(node->right);
-            node->car->displayInfo();
+            node->car->showInfo();
             cout << endl;
             reverseInOrderTraversal(node->left);
         }
@@ -280,30 +280,30 @@ public:
         cleanup(root);
     }
 
-    // Add a car to the BST based on price
+    // Add a car to the BST based on cost
     void addCar(Car* car) {
         root = insert(root, car);
     }
 
-    // Display cars sorted by price (low to high)
-    void displayLowToHigh() const {
+    // show cars sorted by cost (low to high)
+    void carCostLowToHigh() const {
         if (root == nullptr) {
             cout << "No cars in the catalog." << endl;
             return;
         }
 
-        cout << "\n----- Cars Sorted by Price (Low to High) -----" << endl;
+        cout << "\n----- Cars Sorted by cost (Low to High) -----" << endl;
         inOrderTraversal(root);
     }
 
-    // Display cars sorted by price (high to low)
-    void displayHighToLow() const {
+    // show cars sorted by cost (high to low)
+    void carCostHighToLow() const {
         if (root == nullptr) {
             cout << "No cars in the catalog." << endl;
             return;
         }
 
-        cout << "\n----- Cars Sorted by Price (High to Low) -----" << endl;
+        cout << "\n----- Cars Sorted by cost (High to Low) -----" << endl;
         reverseInOrderTraversal(root);
     }
 };
@@ -311,12 +311,12 @@ public:
 // Main function
 int main() {
     LinkedList carList;
-    BinarySearchTree priceTree;
+    BinarySearchTree costTree;
 
     int choice;
-    string make, model, type;
-    int year, doors;
-    double price, bedLength, towingCapacity;
+    string brand, modelType, type;
+    int modelYear, doors;
+    double cost, bedLength, towingCapacity;
     bool hasThirdRow;
     Car* newCar = nullptr;
 
@@ -328,10 +328,10 @@ int main() {
             cout << "1. Add a Sedan" << endl;
             cout << "2. Add an SUV" << endl;
             cout << "3. Add a Truck" << endl;
-            cout << "4. Display all cars" << endl;
-            cout << "5. Display cars by type" << endl;
-            cout << "6. Display cars by price (Low to High)" << endl;
-            cout << "7. Display cars by price (High to Low)" << endl;
+            cout << "4. show all cars" << endl;
+            cout << "5. show cars by type" << endl;
+            cout << "6. show cars by cost (Low to High)" << endl;
+            cout << "7. show cars by cost (High to Low)" << endl;
             cout << "8. Exit" << endl;
             cout << "Enter your choice: ";
             
@@ -341,77 +341,77 @@ int main() {
 
             switch (choice) {
                 case 1: // Add a Sedan
-                    cout << "Enter make: ";
-                    cin >> make;
-                    cout << "Enter model: ";
-                    cin >> model;
-                    cout << "Enter year: ";
-                    cin >> year;
-                    cout << "Enter price: $";
-                    cin >> price;
+                    cout << "Enter brand: ";
+                    cin >> brand;
+                    cout << "Enter modelType: ";
+                    cin >> modelType;
+                    cout << "Enter modelYear: ";
+                    cin >> modelYear;
+                    cout << "Enter cost: $";
+                    cin >> cost;
                     cout << "Enter number of doors: ";
                     cin >> doors;
                     
-                    newCar = new Sedan(make, model, year, price, doors);
+                    newCar = new Sedan(brand, modelType, modelYear, cost, doors);
                     carList.addCar(newCar);
-                    priceTree.addCar(newCar);
+                    costTree.addCar(newCar);
                     cout << "Sedan added successfully!" << endl;
                     break;
                 
                 case 2: // Add an SUV
-                    cout << "Enter make: ";
-                    cin >> make;
-                    cout << "Enter model: ";
-                    cin >> model;
-                    cout << "Enter year: ";
-                    cin >> year;
-                    cout << "Enter price: $";
-                    cin >> price;
+                    cout << "Enter brand: ";
+                    cin >> brand;
+                    cout << "Enter modelType: ";
+                    cin >> modelType;
+                    cout << "Enter modelYear: ";
+                    cin >> modelYear;
+                    cout << "Enter cost: $";
+                    cin >> cost;
                     cout << "Has third row? (1 for Yes, 0 for No): ";
                     cin >> hasThirdRow;
                     
-                    newCar = new SUV(make, model, year, price, hasThirdRow);
+                    newCar = new SUV(brand, modelType, modelYear, cost, hasThirdRow);
                     carList.addCar(newCar);
-                    priceTree.addCar(newCar);
+                    costTree.addCar(newCar);
                     cout << "SUV added successfully!" << endl;
                     break;
                 
                 case 3: // Add a Truck
-                    cout << "Enter make: ";
-                    cin >> make;
-                    cout << "Enter model: ";
-                    cin >> model;
-                    cout << "Enter year: ";
-                    cin >> year;
-                    cout << "Enter price: $";
-                    cin >> price;
+                    cout << "Enter brand: ";
+                    cin >> brand;
+                    cout << "Enter modelType: ";
+                    cin >> modelType;
+                    cout << "Enter modelYear: ";
+                    cin >> modelYear;
+                    cout << "Enter cost: $";
+                    cin >> cost;
                     cout << "Enter bed length (in feet): ";
                     cin >> bedLength;
                     cout << "Enter towing capacity (in pounds): ";
                     cin >> towingCapacity;
                     
-                    newCar = new Truck(make, model, year, price, bedLength, towingCapacity);
+                    newCar = new Truck(brand, modelType, modelYear, cost, bedLength, towingCapacity);
                     carList.addCar(newCar);
-                    priceTree.addCar(newCar);
+                    costTree.addCar(newCar);
                     cout << "Truck added successfully!" << endl;
                     break;
                 
-                case 4: // Display all cars
-                    carList.displayAllCars();
+                case 4: // show all cars
+                    carList.showAllCars();
                     break;
                 
-                case 5: // Display cars by type
+                case 5: // show cars by type
                     cout << "Enter car type (Sedan, SUV, or Truck): ";
                     cin >> type;
-                    carList.displayCarsByType(type);
+                    carList.showCarsByType(type);
                     break;
                 
-                case 6: // Display cars by price (Low to High)
-                    priceTree.displayLowToHigh();
+                case 6: // show cars by cost (Low to High)
+                    costTree.carCostLowToHigh();
                     break;
                 
-                case 7: // Display cars by price (High to Low)
-                    priceTree.displayHighToLow();
+                case 7: // show cars by cost (High to Low)
+                    costTree.carCostHighToLow();
                     break;
                 
                 case 8: // Exit
