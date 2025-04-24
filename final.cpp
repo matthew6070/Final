@@ -1,6 +1,4 @@
 // Car Catalog Project
-// This program demonstrates linked lists, binary search trees, and OOP concepts
-// including inheritance, polymorphism, and virtual functions
 
 #include <iostream>
 #include <string>
@@ -243,20 +241,20 @@ private:
     // low to high cost Traversal
     void inOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
-            orderDirection(node->left);
+            inOrderTraversal(node->left);
             node->car->showInfo();
             cout << endl;
-            orderDirection(node->right);
+            inOrderTraversal(node->right);
         }
     }
 
     // high to low cost Traversal
     void reverseInOrderTraversal(TreeNode* node) const {
         if (node != nullptr) {
-            reverseOrder(node->right);
+            reverseInOrderTraversal(node->right);
             node->car->showInfo();
             cout << endl;
-            reverseOrder(node->left);
+            reverseInOrderTraversal(node->left);
         }
     }
 
@@ -291,19 +289,9 @@ public:
         }
 
         cout << "\n----- Cars Sorted by cost (Low to High) -----" << endl;
-        orderDirection(root);
+       inOrderTraversal(root);
     }
 
-    // show cars sorted by high to low costs
-    void carCostHighToLow() const {
-        if (root == nullptr) {
-            cout << "No cars in the catalog." << endl;
-            return;
-        }
-
-        cout << "\n----- Cars Sorted by cost (High to Low) -----" << endl;
-        reverseOrder(root);
-    }
 };
 
 
@@ -329,8 +317,7 @@ int main() {
             cout << "4. show all cars" << endl;
             cout << "5. show cars by type" << endl;
             cout << "6. show cars by cost (Low to High)" << endl;
-            cout << "7. show cars by cost (High to Low)" << endl;
-            cout << "8. Exit" << endl;
+            cout << "7. Exit" << endl;
             cout << "Enter your choice: ";
             
             if (!(cin >> choice)) {
@@ -338,7 +325,7 @@ int main() {
             }
 
             switch (choice) {
-                //add a Sedan car type
+                // adding sedan to LL
                 case 1: 
                     cout << "Enter brand: ";
                     cin >> brand;
@@ -356,7 +343,7 @@ int main() {
                     costTree.addCar(newCar);
                     cout << "Sedan added successfully!" << endl;
                     break;
-                //add a SUV car type
+                //adding a SUV to Linked List
                 case 2: 
                     cout << "Enter brand: ";
                     cin >> brand;
@@ -375,7 +362,7 @@ int main() {
                     cout << "SUV added successfully!" << endl;
                     break;
                 
-                case 3: // Add a Truck car Type
+                case 3: // Add a Truck car Type to Linked List
                     cout << "Enter brand: ";
                     cin >> brand;
                     cout << "Enter modelType: ";
@@ -399,29 +386,25 @@ int main() {
                 case 4: 
                     carList.showAllCars();
                     break;
-                // show cars by type
+                // showcase all cars by type
                 case 5: 
                     cout << "Enter car type (Sedan, SUV, or Truck): ";
                     cin >> type;
                     carList.showCarsByType(type);
                     break;
-                // show cars by cost Low to High cost
+                // show off cars by cost Low to High cost
                 case 6: 
                     costTree.carCostLowToHigh();
                     break;
-                // list cars by High to Low cost
-                case 7: 
-                    costTree.carCostHighToLow();
-                    break;
                 // Exit the program
-                case 8: 
+                case 7: 
                     cout << "Exiting program. Goodbye!" << endl;
                     break;
                 
                 default:
                     cout << "Invalid choice. Please try again." << endl;
             }
-        } while (choice != 8);
+        } while (choice != 7);
     } catch (const exception& e) {
         cout << "Error: " << e.what() << endl;
         cin.clear();
