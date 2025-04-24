@@ -361,8 +361,8 @@ int main() {
                     costTree.addCar(newCar);
                     cout << "SUV added successfully!" << endl;
                     break;
-                
-                case 3: // Add a Truck car Type to Linked List
+                // Add a Truck car Type to Linked List
+                case 3: 
                     cout << "Enter brand: ";
                     cin >> brand;
                     cout << "Enter modelType: ";
