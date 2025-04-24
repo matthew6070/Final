@@ -401,7 +401,7 @@ int main() {
                     costTree.carCostHighToLow();
                     break;
                 // Exit the program
-                case 7: 
+                case 8: 
                     cout << "Exiting program. Goodbye!" << endl;
                     break;
                 
