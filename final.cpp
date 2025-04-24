@@ -392,9 +392,13 @@ int main() {
                     cin >> type;
                     carList.showCarsByType(type);
                     break;
-                // show off cars by cost Low to High cost
+                // show cars by cost Low to High cost
                 case 6: 
                     costTree.carCostLowToHigh();
+                    break;
+                // list cars by High to Low cost
+                case 7: 
+                    costTree.carCostHighToLow();
                     break;
                 // Exit the program
                 case 7: 
