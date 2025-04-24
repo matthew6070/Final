@@ -93,7 +93,7 @@ public:
     }
 };
 
-// Derived class - Truck
+// Derived class Truck
 class Truck : public Car {
 private:
     double bedLength;
@@ -114,7 +114,7 @@ public:
     }
 };
 
-// Node class for linked list
+// Node class for the linked list
 class Node {
 public:
     Car* car;
@@ -142,7 +142,7 @@ public:
         while (current != nullptr) {
             Node* next = current->next;
             delete current->car; // Delete the Car object
-            delete current;      // Delete the Node
+            delete current; // Delete the Node
             current = next;
         }
     }
